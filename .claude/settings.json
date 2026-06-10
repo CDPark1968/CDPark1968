@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "higgsfield": {
+      "command": "node",
+      "args": ["/home/user/CDPark1968/.claude/higgsfield-mcp/server.js"],
+      "env": {
+        "HF_BIN": "higgsfield"
+      }
+    }
+  }
+}
