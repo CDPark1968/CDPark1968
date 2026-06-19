@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "obsidian": {
+      "command": "npx",
+      "args": ["-y", "mcp-obsidian"],
+      "env": {
+        "OBSIDIAN_API_KEY": "여기에_API_키_입력",
+        "OBSIDIAN_HOST": "localhost",
+        "OBSIDIAN_PORT": "27123"
+      }
+    }
+  }
+}
