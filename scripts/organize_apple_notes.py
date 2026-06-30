@@ -13,7 +13,27 @@ from pathlib import Path
 from datetime import datetime
 
 # ─── 설정 ────────────────────────────────────────────────────────
-VAULT_PATH = Path.home() / "Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian_Vault"
+def find_vault() -> Path:
+    """볼트 경로 자동 탐색: Mac → 현재 디렉토리 순으로 시도"""
+    candidates = [
+        # Mac iCloud 경로
+        Path.home() / "Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian_Vault",
+        # 현재 디렉토리 자체가 볼트인 경우 (아이패드 a-Shell pickFolder 이후)
+        Path("."),
+        # 현재 디렉토리 안의 Obsidian_Vault 폴더
+        Path("Obsidian_Vault"),
+    ]
+    for p in candidates:
+        if (p / "애플메모정리").exists():
+            print(f"✅ 볼트 경로 감지: {p.resolve()}")
+            return p.resolve()
+
+    print("❌ 볼트를 자동으로 찾지 못했습니다.")
+    print("   아이패드: a-Shell에서 먼저 'pickFolder' 실행 → Obsidian_Vault 선택 후 재실행")
+    print("   Mac: ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian_Vault 확인")
+    sys.exit(1)
+
+VAULT_PATH = find_vault()
 NOTES_FOLDER = "애플메모정리"
 MOC_FOLDER = "00_MOC"  # MOC 파일 저장 폴더
 
