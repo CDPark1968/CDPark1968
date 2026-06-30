@@ -13,28 +13,32 @@ from pathlib import Path
 from datetime import datetime
 
 # ─── 설정 ────────────────────────────────────────────────────────
-def find_vault() -> Path:
-    """볼트 경로 자동 탐색: Mac → 현재 디렉토리 순으로 시도"""
+def find_vault() -> tuple[Path, str]:
+    """볼트 경로 및 Apple Notes 폴더명 자동 탐색"""
     candidates = [
-        # Mac iCloud 경로
         Path.home() / "Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian_Vault",
-        # 현재 디렉토리 자체가 볼트인 경우 (아이패드 a-Shell pickFolder 이후)
         Path("."),
-        # 현재 디렉토리 안의 Obsidian_Vault 폴더
         Path("Obsidian_Vault"),
     ]
-    for p in candidates:
-        if (p / "애플메모정리").exists():
-            print(f"✅ 볼트 경로 감지: {p.resolve()}")
-            return p.resolve()
+    # 가능한 Apple Notes 폴더명
+    notes_folder_names = ["Apple Notes", "애플메모정리", "Apple_Notes"]
 
-    print("❌ 볼트를 자동으로 찾지 못했습니다.")
-    print("   아이패드: a-Shell에서 먼저 'pickFolder' 실행 → Obsidian_Vault 선택 후 재실행")
-    print("   Mac: ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian_Vault 확인")
+    for p in candidates:
+        for folder_name in notes_folder_names:
+            if (p / folder_name).exists():
+                print(f"✅ 볼트 경로: {p.resolve()}")
+                print(f"✅ 메모 폴더: {folder_name}")
+                return p.resolve(), folder_name
+
+    print("❌ Apple Notes 폴더를 찾지 못했습니다.")
+    print("   현재 위치의 폴더 목록:")
+    for item in sorted(Path(".").iterdir()):
+        if item.is_dir():
+            print(f"     📁 {item.name}")
+    print("\n   a-Shell: 'pickFolder' 실행 → 볼트 루트 폴더 선택 후 재실행")
     sys.exit(1)
 
-VAULT_PATH = find_vault()
-NOTES_FOLDER = "애플메모정리"
+VAULT_PATH, NOTES_FOLDER = find_vault()
 MOC_FOLDER = "00_MOC"  # MOC 파일 저장 폴더
 
 # ─── 카테고리별 키워드 (제목 + 내용 검색) ──────────────────────
