@@ -211,19 +211,18 @@ def main():
     all_md = [
         f for f in VAULT.rglob("*.md")
         if not any(part in SKIP_FOLDERS for part in f.parts)
-        and "Apple Notes" not in str(f)  # Apple Notes는 너무 많아서 별도 처리
     ]
 
-    print(f"📝 대상 파일: {len(all_md)}개 (Apple Notes 제외)\n")
+    print(f"📝 대상 파일: {len(all_md)}개\n")
 
     total_links = 0
     modified_files = 0
 
     for i, filepath in enumerate(all_md, 1):
+        if i % 200 == 0 or i == len(all_md):
+            print(f"   진행 중: {i}/{len(all_md)} ({i*100//len(all_md)}%)")
         count = process_file(filepath)
         if count > 0:
-            rel = filepath.relative_to(VAULT)
-            print(f"  ✅ {rel}  (+{count}개 링크)")
             total_links += count
             modified_files += 1
 
@@ -231,15 +230,8 @@ def main():
     print(f"🎉 완료!")
     print(f"   수정된 파일: {modified_files}개")
     print(f"   추가된 링크: {total_links}개")
-    print(f"\nObsidian에서 Cmd+R 로 새로고침하세요.")
-    print(f"그래프 보기(Cmd+G)에서 연결 관계를 확인할 수 있습니다.")
-
-    # Apple Notes 처리 여부 확인
-    apple_notes = list((VAULT / "06_개인" / "Apple Notes").rglob("*.md"))
-    if apple_notes:
-        print(f"\n💡 Apple Notes({len(apple_notes)}개)도 처리하려면:")
-        print(f"   스크립트에서 'Apple Notes' 제외 조건을 삭제 후 재실행")
-        print(f"   (파일이 많아 시간이 걸릴 수 있습니다)")
+    print(f"\nObsidian에서 Cmd+R (Mac) 또는 볼트 새로고침으로 확인하세요.")
+    print(f"그래프 보기에서 노트 간 연결 관계를 확인할 수 있습니다.")
 
 
 if __name__ == "__main__":
