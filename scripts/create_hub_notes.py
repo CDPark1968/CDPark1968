@@ -10,6 +10,13 @@ from pathlib import Path
 from datetime import datetime
 
 def find_vault() -> Path:
+    import os
+    env_path = os.environ.get("VAULT_PATH")
+    if env_path:
+        p = Path(env_path)
+        if p.exists():
+            print(f"✅ 볼트 (환경변수): {p.resolve()}")
+            return p.resolve()
     candidates = [
         Path.home() / "Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian_Vault",
         Path("."),
@@ -20,6 +27,8 @@ def find_vault() -> Path:
             print(f"✅ 볼트: {p.resolve()}")
             return p.resolve()
     print("❌ 볼트를 찾을 수 없습니다.")
+    print("   a-Shell: pickFolder로 볼트 선택 후 아래 명령 실행:")
+    print("   VAULT_PATH=$(pwd) python3 ~/cdpark1968/scripts/create_hub_notes.py")
     sys.exit(1)
 
 VAULT = find_vault()
