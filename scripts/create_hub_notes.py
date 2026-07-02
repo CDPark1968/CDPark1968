@@ -6,32 +6,54 @@
 """
 
 import sys
+import os
+import argparse
 from pathlib import Path
 from datetime import datetime
 
-def find_vault() -> Path:
-    import os
+def find_vault(vault_arg: str = None) -> Path:
+    # 1. 명령줄 인자
+    if vault_arg:
+        p = Path(vault_arg)
+        if p.exists():
+            print(f"✅ 볼트 (인자): {p.resolve()}")
+            return p.resolve()
+        print(f"❌ 인자 경로 없음: {vault_arg}")
+
+    # 2. 환경변수
     env_path = os.environ.get("VAULT_PATH")
     if env_path:
         p = Path(env_path)
         if p.exists():
             print(f"✅ 볼트 (환경변수): {p.resolve()}")
             return p.resolve()
+
+    # 3. 자동 탐색
+    markers = ["00_Index", "_Templates", "01_업무", "Apple Notes", "06_개인"]
     candidates = [
         Path.home() / "Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian_Vault",
         Path("."),
         Path("Obsidian_Vault"),
     ]
     for p in candidates:
-        if any((p / m).exists() for m in ["00_Index", "_Templates", "01_업무", "Apple Notes"]):
+        if any((p / m).exists() for m in markers):
             print(f"✅ 볼트: {p.resolve()}")
             return p.resolve()
+
     print("❌ 볼트를 찾을 수 없습니다.")
-    print("   a-Shell: pickFolder로 볼트 선택 후 아래 명령 실행:")
-    print("   VAULT_PATH=$(pwd) python3 ~/cdpark1968/scripts/create_hub_notes.py")
+    print(f"   현재 위치: {Path('.').resolve()}")
+    print(f"   현재 폴더 내용: {[x.name for x in Path('.').iterdir() if x.is_dir()][:10]}")
+    print()
+    print("   a-Shell 사용법:")
+    print("   pickFolder  ← Obsidian_Vault 선택")
+    print("   python3 ~/cdpark1968/scripts/create_hub_notes.py")
     sys.exit(1)
 
-VAULT = find_vault()
+parser = argparse.ArgumentParser()
+parser.add_argument("--vault", help="볼트 경로 직접 지정")
+args, _ = parser.parse_known_args()
+
+VAULT = find_vault(args.vault)
 TODAY = datetime.now().strftime("%Y-%m-%d")
 
 HUB_NOTES = {
