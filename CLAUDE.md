@@ -132,3 +132,19 @@
 > → Step1: 진짜 질문 = "한정된 CAPA를 고객사 A와 다른 고객 사이에 어떻게 배분해야 매출과 관계 모두를 지키는가"
 > → Step2: research, strategy, finance, devils-advocate, customer, competitor, negotiation, second-order, base-rate, future, ceo-reviewer, cognitive-challenger 전원 소집
 > → Step3~5: 프로토콜대로 진행 후 보고서 산출
+
+---
+
+## 9. 외부 데이터 소스 연동
+
+research-agent는 웹 검색 외에 아래 소스를 사실관계 조회에 사용한다. **다른 11개 Agent는 직접 외부 소스를 조회하지 않고, research-agent가 정리한 사실 위에서만 판단한다** (2장 3단계 "같은 사실 위에서 판단" 원칙 유지 — 소스가 늘어나도 단일 사실 기반 구조는 깨지지 않는다).
+
+| 소스 | 연동 상태 | 용도 |
+|---|---|---|
+| Notion | 연결된 경우 사용 (`notion-search` → `notion-fetch`) | 사내 문서, 이전 보고서, 미팅노트 |
+| Google Drive | 연결된 경우 사용 (`search_files`/`list_recent_files` → `read_file_content`) | 계약서, IR자료, 스프레드시트 |
+| Obsidian | **클라우드 연동 불가** (로컬 노트 앱, MCP 커넥터 없음) | 로컬에서 Claude Code 실행 시에만 볼트 폴더를 Read/Glob으로 직접 참조 가능. 원격/클라우드 세션에서는 접근 불가 — 필요하면 노트를 Google Drive에 동기화하거나 파일로 첨부해서 전달 |
+
+- 조회 우선순위: 저장소 로컬 파일 → Notion → Google Drive → 웹 검색 → (로컬 세션 한정) Obsidian 볼트.
+- 모든 항목에 출처 태그를 남긴다: `[Notion: 페이지명]`, `[Drive: 파일명]`, `[출처: URL]`.
+- Notion/Drive에서 가져온 고객사·경쟁사 실명, 매출·CAPA 등 민감 정보는 세션 답변에는 사용해도 되지만, 이 GitHub 저장소(공개)에는 그대로 옮겨 적지 않는다 (1장 7항 원칙과 동일).
