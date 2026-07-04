@@ -1,15 +1,10 @@
 # Obsidian 로컬 동기화 설정 (git 브릿지)
 
-Obsidian은 iCloud Drive로 볼트를 동기화하고 있고, iCloud Drive와 Obsidian 모두 이 원격 세션에서 접근 가능한 API/MCP가 없다. 대신 **이 git 레포를 로컬 볼트와 파일 시스템 레벨에서 연결**해서, 세션이 커밋·푸시할 때마다 `git pull` 한 번으로 Obsidian에 반영되게 한다.
+Obsidian 볼트는 로컬 경로 `~/Documents/Obsidian/키파운드리`에 있다. 이 경로와 Obsidian 앱 모두 이 원격 세션에서 접근 가능한 API/MCP가 없으므로, **이 git 레포를 로컬 볼트와 파일 시스템 레벨에서 연결**해서 세션이 커밋·푸시할 때마다 `git pull` 한 번으로 Obsidian에 반영되게 한다.
 
-## 사전 확인
-Obsidian 볼트의 실제 경로(맥 기준, iCloud Drive 동기화 볼트인 경우 보통 아래 형태다):
-```
-~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<볼트이름>
-```
-Finder에서 볼트를 iCloud Drive 안에서 우클릭 → "정보 가져오기"로 정확한 경로를 확인한다. 아래 예시의 `<VAULT_PATH>`를 이 경로로 바꿔서 사용한다.
+볼트 자체가 이미 "키파운드리"이므로, 레포의 `obsidian-vault/02_전략/키파운드리` 폴더를 볼트 루트의 `02_전략`으로 symlink한다(폴더명 중복을 피하기 위해 한 단계 아래에 연결).
 
-## 설정 (최초 1회)
+## 설정 (최초 1회, 터미널에서 그대로 실행)
 
 1. 이 레포를 로컬 아무 위치에 clone한다 (볼트 밖 — 예: `~/dev/CDPark1968`):
    ```bash
@@ -18,14 +13,13 @@ Finder에서 볼트를 iCloud Drive 안에서 우클릭 → "정보 가져오기
    git checkout claude/keyfoundry-ai-agents-vzfyfp
    ```
 
-2. 레포 안의 `obsidian-vault/02_전략/키파운드리` 폴더를 실제 볼트의 `02_전략/키파운드리` 자리에 symlink로 연결한다:
+2. 레포 안의 `obsidian-vault/02_전략/키파운드리` 폴더를 실제 볼트의 `02_전략` 자리에 symlink로 연결한다:
    ```bash
-   VAULT_PATH="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/<볼트이름>"
-   mkdir -p "$VAULT_PATH/02_전략"
-   # 기존에 같은 이름의 실제 폴더가 있으면 먼저 백업/병합할 것
-   ln -s ~/dev/CDPark1968/obsidian-vault/02_전략/키파운드리 "$VAULT_PATH/02_전략/키파운드리"
+   VAULT_PATH="$HOME/Documents/Obsidian/키파운드리"
+   # 볼트 안에 이미 02_전략 폴더(실제 폴더)가 있다면 먼저 이름을 바꾸거나 내용을 백업할 것
+   ln -s ~/dev/CDPark1968/obsidian-vault/02_전략/키파운드리 "$VAULT_PATH/02_전략"
    ```
-   symlink 후 Obsidian을 껐다 켜면(또는 볼트 새로고침) `02_전략/키파운드리` 폴더가 그대로 보인다.
+   symlink 후 Obsidian을 껐다 켜면(또는 볼트 새로고침) 볼트 루트에 `02_전략` 폴더가 그대로 보인다.
 
 ## 갱신 (매번)
 `/keyfoundry-debate` 세션이 새 요약 노트를 `obsidian-vault/02_전략/키파운드리/`에 커밋·푸시하면, 로컬에서 아래만 실행한다:
