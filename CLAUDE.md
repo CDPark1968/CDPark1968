@@ -143,8 +143,18 @@ research-agent는 웹 검색 외에 아래 소스를 사실관계 조회에 사�
 |---|---|---|
 | Notion | 연결된 경우 사용 (`notion-search` → `notion-fetch`) | 사내 문서, 이전 보고서, 미팅노트 |
 | Google Drive | 연결된 경우 사용 (`search_files`/`list_recent_files` → `read_file_content`) | 계약서, IR자료, 스프레드시트 |
-| Obsidian | **클라우드 연동 불가** (로컬 노트 앱, MCP 커넥터 없음) | 로컬에서 Claude Code 실행 시에만 볼트 폴더를 Read/Glob으로 직접 참조 가능. 원격/클라우드 세션에서는 접근 불가 — 필요하면 노트를 Google Drive에 동기화하거나 파일로 첨부해서 전달 |
+| Obsidian | **로컬 전용 연동** (`.mcp.json`에 설정 완료, 1회 로컬 준비 필요) | 로컬에서 Claude Code로 이 저장소를 열면 Obsidian MCP(`obsidian`)로 볼트를 직접 조회. 원격/클라우드 세션에서는 접근 불가 |
 
-- 조회 우선순위: 저장소 로컬 파일 → Notion → Google Drive → 웹 검색 → (로컬 세션 한정) Obsidian 볼트.
-- 모든 항목에 출처 태그를 남긴다: `[Notion: 페이지명]`, `[Drive: 파일명]`, `[출처: URL]`.
-- Notion/Drive에서 가져온 고객사·경쟁사 실명, 매출·CAPA 등 민감 정보는 세션 답변에는 사용해도 되지만, 이 GitHub 저장소(공개)에는 그대로 옮겨 적지 않는다 (1장 7항 원칙과 동일).
+- 조회 우선순위: 저장소 로컬 파일 → Notion → Google Drive → 웹 검색 → (로컬 세션 한정) Obsidian MCP.
+- 모든 항목에 출처 태그를 남긴다: `[Notion: 페이지명]`, `[Drive: 파일명]`, `[Obsidian: 노트명]`, `[출처: URL]`.
+- Notion/Drive/Obsidian에서 가져온 고객사·경쟁사 실명, 매출·CAPA 등 민감 정보는 세션 답변에는 사용해도 되지만, 이 GitHub 저장소(공개)에는 그대로 옮겨 적지 않는다 (1장 7항 원칙과 동일).
+
+### Obsidian MCP 로컬 설정 (1회, 원격 세션에서는 대신 수행 불가)
+
+이 저장소 루트의 `.mcp.json`은 Obsidian의 **Local REST API** 커뮤니티 플러그인이 제공하는 내장 MCP 서버를 가리키도록 미리 구성되어 있다. API 키는 저장소에 넣지 않고 환경변수로만 참조한다. 박찬동의 로컬 PC에서 아래를 1회 수행하면 연동이 완성된다:
+
+1. Obsidian 앱 → 설정 → Community plugins → "Local REST API" 설치·활성화. 플러그인 버전이 화면에 표시되지 않으면(4.0.0 미만 구버전 가능성) 삭제 후 커뮤니티 브라우저에서 새로 설치한다.
+2. 플러그인 설정 화면에서 API 키를 복사한다.
+3. 로컬 셸 프로필(`~/.zshrc` 등, 저장소 파일 아님)에 `export OBSIDIAN_API_KEY="복사한 키"`를 추가한다.
+4. 이 저장소를 로컬에 pull한 뒤 Claude Code를 열면 `.mcp.json`의 `obsidian` 서버가 `https://127.0.0.1:27124/mcp/`로 자동 연결된다.
+5. 자체 서명 인증서(self-signed cert) 때문에 접속 오류가 나면, 플러그인 설정에서 노출하는 정확한 포트/URL을 확인해 `.mcp.json`의 `url` 값을 맞춰 조정한다.
