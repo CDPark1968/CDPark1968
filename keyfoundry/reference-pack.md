@@ -24,11 +24,11 @@
 > 두 핵심 파일(Market Diagnosis, 하반기 웍샾 아젠다)은 요청 시점에 다른 파일명으로 이미 폴더에 존재해 검색으로 재확인했다. 파일 ID 기준으로 링크했으므로 향후 파일명이 다시 바뀌어도 링크는 유지된다.
 
 ## 3. Obsidian
-로컬 Obsidian 볼트에 대한 실시간 MCP 연동은 이 원격 세션에서 제공되지 않는다. 대신 이 레포의 `obsidian-vault/` 폴더를 볼트 스테이징 영역으로 사용한다.
+Obsidian 볼트는 iCloud Drive로 동기화되며, iCloud Drive·Obsidian 모두 이 원격 세션에서 접근 가능한 API/MCP가 없다(둘 다 공개 커넥터가 없음). 그래서 **git을 동기화 브릿지로 사용**한다 — 이 레포의 `obsidian-vault/` 폴더가 볼트의 실제 위치와 symlink로 연결된다.
 
-- 경로 규칙: `obsidian-vault/02_전략/키파운드리/`
-- `/keyfoundry-debate` 실행마다 `<안건명>-<YYYY-MM-DD>.md` 요약 노트를 여기 생성한다.
-- 사용자는 이 폴더를 실제 Obsidian 볼트의 `02_전략/키파운드리/`에 동기화(git pull 또는 복사)해서 사용한다.
+- 경로 규칙(레포 쪽): `obsidian-vault/02_전략/키파운드리/`
+- 로컬 연결 설정 방법: `obsidian-vault/SETUP.md` 참고(최초 1회 symlink 설정 후, 매번 `git pull`만 하면 Obsidian에 자동 반영)
+- `/keyfoundry-debate` 실행마다 `<안건명>-<YYYY-MM-DD>.md` 요약 노트를 레포의 위 경로에 생성·커밋·푸시한다.
 
 ## 사용 우선순위
 1. Notion에서 기존 결론·원칙과의 정합성 확인

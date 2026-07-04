@@ -22,7 +22,7 @@ description: 키파운드리 GSM 매출/수익 전략 안건을 놓고 총괄 Ag
 
 ## 산출물 배포
 1. **Notion 저장** — `mcp__Notion__notion-search`로 "키파운드리" 허브 페이지(또는 "키파운드리 Revenue AI Agent Operating Model")를 찾아 그 하위에 `mcp__Notion__notion-create-pages`로 새 보고서 페이지를 만든다. 제목에 안건명과 날짜를 포함한다.
-2. **Obsidian 요약 저장** — 3~5줄 요약(결론 + Decision Ask)을 `obsidian-vault/02_전략/키파운드리/` 아래에 안건명-날짜.md 파일로 Write한다. 원본 Notion 페이지 링크를 함께 남긴다.
+2. **Obsidian 요약 저장** — 3~5줄 요약(결론 + Decision Ask)을 `obsidian-vault/02_전략/키파운드리/` 아래에 안건명-날짜.md 파일로 Write하고, 커밋·푸시한다. 원본 Notion 페이지 링크를 함께 남긴다. 이 폴더는 `obsidian-vault/SETUP.md`의 symlink 설정을 통해 사용자의 로컬 Obsidian 볼트와 연결되어 있으므로, 사용자가 로컬에서 `git pull`만 하면 Obsidian에 그대로 반영된다.
 3. 두 산출물 모두 `keyfoundry/output-template.md`의 Origin/Date 푸터를 포함해야 한다.
 
 ## 원칙

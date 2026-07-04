@@ -31,3 +31,6 @@
 
 ## 출력 규칙
 모든 최종 산출물은 `keyfoundry/output-template.md` 형식을 따르고, 전문은 Notion에, 요약은 `obsidian-vault/02_전략/키파운드리/`에 저장하며, Origin(Codex/Claude Code)과 생성 날짜를 표기한다.
+
+## Obsidian 로컬 연결
+Obsidian 볼트(iCloud Drive 동기화)는 이 원격 세션에서 직접 접근할 수 없어, git을 동기화 브릿지로 쓴다. 최초 1회 설정은 `obsidian-vault/SETUP.md`를 따르고, 이후에는 로컬에서 `git pull`만 하면 새 요약 노트가 Obsidian에 자동 반영된다.
