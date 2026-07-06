@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__telegram__search_dialogs",
+      "mcp__telegram__get_messages",
+      "mcp__telegram__send_message"
+    ]
+  }
+}
