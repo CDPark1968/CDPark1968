@@ -1,4 +1,5 @@
 .env.local
-scripts/ashell/telegram_summary_config.json
-scripts/ashell/telegram_summary_session*
+scripts/ashell/telegram_fetch_config.json
+scripts/ashell/telegram_fetch_session*
+scripts/ashell/unread_messages.txt
 __pycache__/
