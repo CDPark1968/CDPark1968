@@ -65,8 +65,15 @@ def copy_to_clipboard(text):
 
 def main():
     config = load_config()
-    with TelegramClient(SESSION_PATH, config["api_id"], config["api_hash"]) as client:
+    client = TelegramClient(SESSION_PATH, config["api_id"], config["api_hash"])
+    # a-Shell's terminal doesn't support getpass's masked-input prompt, so the
+    # 2FA password (if the account has one) must come from config instead of
+    # being typed interactively.
+    client.start(password=config.get("password"))
+    try:
         items = collect_unread(client)
+    finally:
+        client.disconnect()
 
     if items:
         body = "지난 24시간 동안 안 읽은 Telegram 메시지:\n\n" + "\n".join(items)

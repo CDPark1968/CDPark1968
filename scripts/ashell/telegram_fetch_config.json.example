@@ -1,4 +1,5 @@
 {
   "api_id": 12345678,
-  "api_hash": "your-telegram-api-hash"
+  "api_hash": "your-telegram-api-hash",
+  "password": "your-2fa-cloud-password (2단계 인증을 켜둔 경우에만 필요, 없으면 이 줄 삭제)"
 }
