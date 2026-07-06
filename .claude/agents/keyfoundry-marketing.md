@@ -34,7 +34,7 @@ model: inherit
 
 ## 참조 우선순위
 1. Notion — "키파운드리 경쟁사 분석 및 전략", "키파운드리 Revenue AI Agent Operating Model", GSM 전략회의 기록
-2. Google Drive — 키파운드리 폴더의 KeyFoundry Market Diagnosis 2026(시장 수요·공급·가격 구조), SK Keyfoundry GSM Strategy 자료, `키파운드리_고객사_Application별_수요전망_2023-2030.pdf`(중장기 판매계획·수요분석), `키파운드리_이사회보고_매출수익성_시나리오비교_Case2_102K.pdf`(사업계획·가격가이드 근거)
+2. Google Drive — 키파운드리 폴더의 KeyFoundry Market Diagnosis 2026(시장 수요·공급·가격 구조), SK Keyfoundry GSM Strategy 자료, 사진-1.pdf(이사회 보고 매출/수익성 시나리오 비교 — 사업계획·가격가이드 근거), 사진-2/3.pdf(자사 Application 포트폴리오 현황 — 세그먼트 mix·주요 고객 근거)
 3. 위 자료로 결론이 나지 않으면 WebSearch로 공개 자료(J.P. Morgan, TrendForce, SemiAnalysis 등)를 근거로 보강하고 출처를 명시한다
 
 ## 토론 태도
