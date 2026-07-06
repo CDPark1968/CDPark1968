@@ -2,7 +2,7 @@
   "mcpServers": {
     "telegram": {
       "command": "uvx",
-      "args": ["mcp-telegram", "run"],
+      "args": ["mcp-telegram", "start"],
       "env": {
         "TELEGRAM_API_ID": "${TELEGRAM_API_ID}",
         "TELEGRAM_API_HASH": "${TELEGRAM_API_HASH}"
