@@ -20,8 +20,12 @@
 | [하반기 웍샾 아젠다.docx](https://drive.google.com/file/d/1MZ2EnOXD3MIRguGHXt2gN3zZmEMCV1cF/view) | H2 2026 Executive Workshop 스토리라인·아젠다 설계안. Sales Planning/총괄 Agent 회의 안건 구조 참조 |
 | [KeyFoundry H2Workshop 2026.docx](https://drive.google.com/file/d/1ATcqN-M6tXtfnxjdC6CcAwwg_KD4B6Ts/view) | 위 아젠다의 실행판 워크숍 덱(하이닉스 미팅 근거, Vcore 본질, 가격 실행) — 보조 참조 |
 | SK Keyfoundry GSM 27Co Weekly Heatmap (xlsm, 3종) | 27개사 위클리 트래킹 시트 — Sales Planning/Asia Sales Agent 실적·경쟁 모니터링 |
+| `키파운드리_고객사_Application별_수요전망_2023-2030.pdf` (업로드 대기) | Region(미주/유럽/중국 등)×Customer×Application×Tech.별 Run rate·실적·Commitment·2026 2H~2030 수요전망. Sales Planning/Marketing/Americas&Europe·Asia Sales 1순위 참조 |
+| `키파운드리_이사회보고_매출수익성_시나리오비교_Case2_102K.pdf` (업로드 대기) | "4월 이사회 보고(a)" vs "Case 2_102K(b)" FY26~FY30 매출·매출총이익·영업이익·EBITDA·CapEx·목표매출·ASP 비교 + BCD Prime 등 제품별 매출 상세. Sales Planning/Marketing/총괄 참조 |
 
 > 두 핵심 파일(Market Diagnosis, 하반기 웍샾 아젠다)은 요청 시점에 다른 파일명으로 이미 폴더에 존재해 검색으로 재확인했다. 파일 ID 기준으로 링크했으므로 향후 파일명이 다시 바뀌어도 링크는 유지된다.
+>
+> 위 2개 "업로드 대기" 문서는 2026-07-06 사용자가 첨부한 스캔 PDF다. 원본이 사용자 로컬 기기에 있고, 이 원격 세션에서 Drive로 재업로드하려면 base64 인코딩 때문에 파일당 약 20만 토큰이 소모되어 비현실적이므로, 사용자가 위 권장 파일명으로 직접 Drive 키파운드리 폴더에 업로드하기로 했다. 업로드 확인 후 이 표의 파일 ID/링크를 실제 값으로 갱신할 것. 상세 배경은 Notion [신규 참조자료 안내 — 고객 수요전망 & 이사회 보고 매출시나리오 (2026-07-06)](https://app.notion.com/p/3958899a4794816fa947e583c7bdbe33) 참고.
 
 ## 3. Obsidian
 Obsidian 볼트는 iCloud Drive로 동기화되며, iCloud Drive·Obsidian 모두 이 원격 세션에서 접근 가능한 API/MCP가 없다(둘 다 공개 커넥터가 없음). 그래서 **git을 동기화 브릿지로 사용**한다 — 이 레포의 `obsidian-vault/` 폴더가 볼트의 실제 위치와 symlink로 연결된다.

@@ -33,7 +33,7 @@ Forecast accuracy 및 variance 감소율 · 실행판매계획 달성률 · 목�
 
 ## 참조 우선순위
 1. Notion — 키파운드리 Revenue AI Agent Operating Model(Allocation Score 기준), GSM 전략회의 기록
-2. Google Drive — 하반기 웍샾 아젠다.docx / KeyFoundry H2Workshop 2026.docx(H2 mix discipline·선P/O·revenue plan 근거), forecast sheet, Keyfoundry_GSM_Notion_DB_Template
+2. Google Drive — 하반기 웍샾 아젠다.docx / KeyFoundry H2Workshop 2026.docx(H2 mix discipline·선P/O·revenue plan 근거), forecast sheet, Keyfoundry_GSM_Notion_DB_Template, `키파운드리_고객사_Application별_수요전망_2023-2030.pdf`(고객·Application별 delivery·mix 근거), `키파운드리_이사회보고_매출수익성_시나리오비교_Case2_102K.pdf`(실행판매계획·mix 목표치 근거)
 3. 정량 데이터 부재 시 "추정"으로 명시하고 실측 필요 항목을 별도 표기
 
 ## 토론 태도
