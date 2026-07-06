@@ -1,1 +1,4 @@
 .env.local
+scripts/ashell/telegram_summary_config.json
+scripts/ashell/telegram_summary_session*
+__pycache__/
