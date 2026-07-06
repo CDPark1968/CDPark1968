@@ -14,8 +14,11 @@ description: 키파운드리 GSM 매출/수익 전략 안건을 놓고 총괄 Ag
 
 1. **의도 파악** — 안건의 본질과 CEO가 진짜 원하는 결정이 무엇인지 1~2문장으로 정의한다.
 2. **문제 구조화** — 안건을 하위 쟁점으로 분해하고, 각 쟁점을 어느 GSM Agent가 맡을지 매핑한다. 통상 관련 있는 Agent만 소집한다(전원 소집이 기본값이 아니다).
-3. **Agent 지휘(1차 제안 라운드)** — 관련 Agent들을 Agent 도구(subagent_type: keyfoundry-marketing / keyfoundry-tech-marketing / keyfoundry-sales-planning / keyfoundry-sales-americas-europe / keyfoundry-sales-asia / keyfoundry-customer-tech-support)로 병렬 호출해 각자의 관점에서 제안(Proposal)을 받는다. 각 Agent에게는 안건, 관련 참조 자료(Notion/Drive 링크는 `keyfoundry/reference-pack.md` 참고), 요구 출력 형식(결론→근거→실행안→리스크→Decision Ask)을 명시해서 전달한다.
-4. **토론 설계(반박 라운드)** — 1차 제안들 사이에서 상충하거나 검증이 필요한 지점을 식별한다. 상충이 있으면 관련 Agent를 다시 호출해 서로의 주장에 대한 반박(Challenge)을 받는다. 비판은 반드시 대안과 숫자를 포함해야 한다. 최소 1회 재반박 라운드를 거친다.
+3. **Agent 지휘(1차 제안 라운드)** — 관련 Agent들을 Agent 도구(subagent_type: keyfoundry-marketing / keyfoundry-tech-marketing / keyfoundry-sales-planning / keyfoundry-sales-americas-europe / keyfoundry-sales-asia / keyfoundry-customer-tech-support)로 병렬 호출해 각자의 관점에서 제안(Proposal)을 받는다.
+   - 프롬프트에는 안건과 참조 우선순위(`keyfoundry/reference-pack.md` 링크)만 제시한다. 배경 사실을 요약해서 대신 써주지 않는다 — 각 Agent가 자신의 정의 파일에 있는 "필수 조사 절차"에 따라 `mcp__Notion__notion-search`/`notion-fetch`, `mcp__Google_Drive__search_files`/`read_file_content`를 직접 호출해 조회하도록 명시적으로 지시한다.
+   - 요구 출력 형식(결론→근거→실행안→리스크→Decision Ask→**조회 문서 목록**)을 함께 전달한다.
+   - 응답에 조회 문서 목록이 없거나 배경 지식만으로 답한 정황이 보이면, 그 Agent를 다시 호출해 "Notion/Drive를 실제로 조회한 뒤 재답변하라"고 요구하고, 재답변을 받은 뒤에만 다음 단계로 진행한다.
+4. **토론 설계(반박 라운드)** — 1차 제안들 사이에서 상충하거나 검증이 필요한 지점을 식별한다. 상충이 있으면 관련 Agent를 다시 호출해 서로의 주장에 대한 반박(Challenge)을 받는다. 비판은 반드시 대안과 숫자를 포함해야 하며, 필요하면 반박 과정에서 추가 조회도 다시 수행하도록 지시한다. 최소 1회 재반박 라운드를 거친다.
 5. **통합(Reframe & Solution)** — 총괄 관점에서 쟁점을 재정의하고, GSM 10대 원칙(`.claude/agents/keyfoundry-chief-of-staff.md` 참고)에 안건을 대조해 조건부 실행안을 설계한다. Conflict Log(쟁점 / Agent A 주장 / Agent B 주장 / 충돌지점 / 중재)를 표로 정리한다.
 6. **사고 확장** — "이 결론에서 우리가 놓치고 있는 관점은 무엇인가"를 자문하고, 최소 1개의 CEO가 미처 요청하지 않은 관점(리스크, 기회, 반대 시나리오)을 추가한다.
 7. **의사결정 지원(최종 보고서)** — `keyfoundry/output-template.md` 형식으로 최종 보고서를 작성한다: 결론 3줄 → Conflict Log → 통합 권고안 → 리스크 → Decision Ask(승인/보류/재검토) → 출처(Origin/Date).
