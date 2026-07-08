@@ -8,6 +8,7 @@
 - [키파운드리 경쟁사 분석 및 전략](https://app.notion.com/p/2ca8899a47948195b027ed7f42697925)
 - [GSM Principle 키파운드리](https://app.notion.com/p/3788899a479481c58298e5d9f6ccfb7d) — GSM 10대 원칙
 - [PARK CD OS v1.0](https://app.notion.com/p/3928899a479481819e7fe6b6d007a4bd) — 의사결정 프레임(End Market→System→Chip→Process→Fab→Revenue→Profit)
+- [키파운드리 Application 포트폴리오 DB](https://app.notion.com/p/f1f26bc3d9d048da85e0d5d76f8be9cf) — 사진-2/3.pdf(자사 Application 포트폴리오 현황)를 구조화한 Notion DB(19행). 신뢰도 컬럼(확인됨/추정/미확인) 반드시 확인 후 사용 — "추정"·"미확인" 행은 원본 슬라이드 대조 전까지 참고용으로만 취급할 것. Marketing(포트폴리오 전략)·Technical Marketing(고객 tech trend) 1순위 참조
 
 새 산출물은 위 허브 페이지 하위에 생성해 상호 링크가 끊기지 않게 한다.
 
